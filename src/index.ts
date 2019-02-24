@@ -13,6 +13,7 @@ import ScheduleRoutes from './routes/schedule';
 
 // Inicializacion
 const app = express();
+import './database';
 
 // Configuracion
 app.set('port', process.env.PORT || 3000);
