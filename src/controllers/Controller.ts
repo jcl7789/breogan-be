@@ -1,10 +1,27 @@
 import { Response, Request } from 'express';
 
 class Controller { 
-
-    index (req: Request, res: Response) {
-        res.json({ title: 'Welcome to Breogan'});
+    public async agregarUnidades(req: Request, res: Response) { 
+        const { identificador, medidas } = req.body();
+        const medida: Unidades = new UnidadesModel({ identificador, medidas })
+        await medida.save();
+        res.send("Unidad agregada");
     }
+
+    public async quitarUnidades(req: Request, res: Response) { 
+        const { identificador, medidas } = req.body();
+        const medida: Unidades = new UnidadesModel({ identificador, medidas })
+        await medida.remove(medida._id);
+        res.send("Unidad removida");
+    }
+
+    public async modificarUnidades(req: Request, res: Response) { 
+        const { identificador, medidas } = req.body();
+        const medida: Unidades = new UnidadesModel({ identificador, medidas })
+        await medida.update(medida._id);
+        res.send("Unidad modificada");
+    }
+
 
 }
 
