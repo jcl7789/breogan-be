@@ -1,8 +1,15 @@
 import { Response, Request } from 'express';
-import UnidadesModel, { Unidades } from "../models/Unidades";
 
+import CategoriasModel, { Categorias } from './../models/Categorias';
+import MarcasModel, { Marcas } from './../models/Marcas';
+import VentasModel, { Ventas } from './../models/Ventas';
+import RenglonVentaModel, { RenglonVenta } from './../models/RenglonVenta';
+import UnidadesModel, { Unidades } from './../models/Unidades';
+import ProductosModel, { Productos } from './../models/Productos';
 
 class Controller { 
+
+    // Unidades
     public async agregarUnidades(req: Request, res: Response) { 
         const { identificador, medidas } = req.body();
         const medida: Unidades = new UnidadesModel({ identificador, medidas })
@@ -26,7 +33,6 @@ class Controller {
 }
 
 export const controller = new Controller();
-
 
 /**
  * response.render() -> devuelve un HTML

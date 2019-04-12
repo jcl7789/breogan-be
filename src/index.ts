@@ -5,12 +5,6 @@ import morgan from 'morgan';
 
 // Importar rutas
 import IndexRoutes from './routes/index';
-import SalesRoutes from './routes/sales';
-import StockRoutes from './routes/stock';
-import StatsRoutes from './routes/stats';
-import ProfilesRoutes from './routes/profile';
-import ScheduleRoutes from './routes/schedule';
-
 
 // Inicializacion
 const app = express();
@@ -33,13 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 // Rutas
-app.use('/', IndexRoutes);
-app.use('/profile', ProfilesRoutes);
-app.use('/sales', SalesRoutes);
-app.use('/schedule', ScheduleRoutes);
-app.use('/stats', StatsRoutes);
-app.use('/stock', StockRoutes);
-
+app.use('/api', IndexRoutes);
 
 // Statics
 app.use(express.static(path.join(__dirname, 'public')));
