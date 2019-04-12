@@ -1,6 +1,7 @@
 import express from 'express';
 import exphbs from 'express-handlebars';
 import path from 'path';
+import morgan from 'morgan';
 
 // Importar rutas
 import IndexRoutes from './routes/index';
@@ -29,6 +30,7 @@ app.set('view engine', '.hbs');
 // MIDD
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 
 // Rutas
 app.use('/', IndexRoutes);
