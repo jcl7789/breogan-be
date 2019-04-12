@@ -1,4 +1,6 @@
 import { Response, Request } from 'express';
+import UnidadesModel, { Unidades } from "../models/Unidades";
+
 
 class Controller { 
     public async agregarUnidades(req: Request, res: Response) { 
@@ -21,8 +23,6 @@ class Controller {
         await medida.update(medida._id);
         res.send("Unidad modificada");
     }
-
-
 }
 
 export const controller = new Controller();
