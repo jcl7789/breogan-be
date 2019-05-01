@@ -30,6 +30,28 @@ class Controller {
         await medida.update(medida._id);
         res.send("Unidad modificada");
     }
+
+    // Marcas
+    public async agregarMarcas(req: Request, res: Response) { 
+        const { identificador, nombre } = req.body();
+        const marca: Marcas = new MarcasModel({ identificador, nombre })
+        await marca.save();
+        res.send("Marca agregada");
+    }
+
+    public async quitarMarcas(req: Request, res: Response) { 
+        const { identificador, nombre } = req.body();
+        const marca: Marcas = new MarcasModel({ identificador, nombre })
+        await marca.remove(marca._id);
+        res.send("Marca removida");
+    }
+
+    public async modificarMarcas(req: Request, res: Response) { 
+        const { identificador, nombre } = req.body();
+        const marca: Marcas = new MarcasModel({ identificador, nombre })
+        await marca.update(marca._id);
+        res.send("Marca modificada");
+    }
 }
 
 export const controller = new Controller();
