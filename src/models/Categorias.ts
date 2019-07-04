@@ -2,7 +2,7 @@ import mongoose, { Schema, model } from "mongoose";
 
 export interface Categorias extends mongoose.Document { 
     identificador: number,
-    medida: string
+    nombre: string
 }
 
 const CategoriasSchema = new Schema({

@@ -3,8 +3,9 @@ import { controller } from '../controllers/Controller';
 
 const router: Router = Router();
 
-router.get('/add', controller.agregarMarcas);
-router.post('/rem', controller.quitarMarcas);
-router.post('/mod', controller.modificarMarcas);
+router.post('/add', controller.agregarMarcas);
+router.post('/rem/:id', controller.quitarMarcas);
+router.post('/mod/:id', controller.modificarMarcas);
+router.get('/con', controller.obtenerMarcas);
 
 export default router;

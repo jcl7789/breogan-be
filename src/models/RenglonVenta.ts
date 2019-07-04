@@ -7,7 +7,6 @@ export interface RenglonVenta extends mongoose.Document {
 
 const RenglonVentaSchema = new Schema({
     id: Number,
-    numero_factura: Number,
     cod_producto: Number,
     cantidad: Number,
     subtotal: Number

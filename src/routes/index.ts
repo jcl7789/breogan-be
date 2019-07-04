@@ -6,6 +6,7 @@ import StatsRoutes from './stats';
 import ProfilesRoutes from './profile';
 import ScheduleRoutes from './schedule';
 import BrandsRoutes from './brands';
+import MerchTypesRoutes from './merchTypes';
 
 const router: Router = Router();
 
@@ -16,5 +17,6 @@ router.use('/schedule', ScheduleRoutes);
 router.use('/stats', StatsRoutes);
 router.use('/stock', StockRoutes);
 router.use('/brands', BrandsRoutes);
+router.use('/merchsTypes', MerchTypesRoutes);
 
 export default router;
