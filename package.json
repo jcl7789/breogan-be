@@ -4,7 +4,7 @@
   "description": "Backend for Breogan-app",
   "main": "index.js",
   "scripts": {
-    "clean": "rd /S /Q build",
+    "clean": "rimraf ./dist",
     "ts:node": "ts-node src/index.ts",
     "build": "tsc",
     "start": "node build/src",
