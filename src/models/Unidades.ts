@@ -6,8 +6,16 @@ export interface Unidades extends mongoose.Document {
 }
 
 const UnidadesSchema = new Schema({
-    identificador: Number,
-    medida: String
+    identificador: {
+        type: Number,
+        required: true,
+        lowercase: true
+    },
+    medida: {
+        type: String,
+        required: true,
+        lowercase: true
+    }
 });
 
 export default model<Unidades>('Unidades', UnidadesSchema);
