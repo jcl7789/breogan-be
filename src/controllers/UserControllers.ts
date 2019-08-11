@@ -35,15 +35,17 @@ class UserController {
       const { email, password } = req.body;
       const usuarios: Usuario = new UsuarioModel({ email, password });
       UsuarioModel.findOne({ email: usuarios.email })
-        .then(user => {
+        .then((user) => {
           if (!user) {
             return res
               .status(401)
               .json({ message: "No se encontro el usuario" });
           }
-          return bcrypt.compare(password, user.password);
+          bcrypt.compare(password, user.password).then((result) => {
+            return result;
+          });
         })
-        .then((result: any) => {
+        .then((result) => {
           if (result) {
             const token = jwt.sign(
               {
