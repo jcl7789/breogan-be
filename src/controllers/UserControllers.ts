@@ -44,7 +44,6 @@ class UserController {
             return result;
           })
           .then(result => {
-            console.log(result);
             if (result) {
               const token = jwt.sign(
                 {

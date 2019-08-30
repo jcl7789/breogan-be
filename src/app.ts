@@ -1,36 +1,48 @@
-import express from 'express';
-import morgan from 'morgan';
-import routes from './routes';
+import express from "express";
+import morgan from "morgan";
+import routes from "./routes";
 
 class Application {
-    app: express.Application;
+  app: express.Application;
 
-    constructor() {
-        this.app = express();
-        this.settings();
-        this.middlewares();
-        this.routes();
-    }
+  constructor() {
+    this.app = express();
+    this.settings();
+    this.middlewares();
+    this.routes();
+  }
 
-    start() {
-        this.app.listen(this.app.get('port'), () => {
-            console.log('Servidor en puerto', this.app.get('port'));
-        });
-    }
+  start() {
+    this.app.listen(this.app.get("port"), () => {
+      console.log("Servidor en puerto", this.app.get("port"));
+    });
+  }
 
-    settings() {
-        this.app.set('port', 3000);
-    }
+  settings() {
+    this.app.set("port", 3000);
+  }
 
-    middlewares() {
-        this.app.use(morgan('dev'));
-        this.app.use(express.json());
-        this.app.use(express.urlencoded({ extended: false }));
-    }
+  middlewares() {
+    this.app.use(morgan("dev"));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
+    this.app.use((req, res, next) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PATCH, DELETE, OPTIONS"
+      );
+      next();
+    });
+  }
 
-    routes() {
-        this.app.use(routes);
-    }
+  routes() {
+    this.app.use(routes);
+  }
 }
 
 export default Application;
