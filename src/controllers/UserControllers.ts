@@ -12,8 +12,8 @@ class UserController {
       const { email, password } = req.body;
       bcrypt.hash(password, 10).then(hash => {
         const usuarios: Usuario = new UsuarioModel({
-          email,
-          hash,
+          email: email,
+          password: hash,
           activo: "1"
         });
         usuarios
@@ -34,41 +34,41 @@ class UserController {
     try {
       const { email, password } = req.body;
       const usuarios: Usuario = new UsuarioModel({ email, password });
-      UsuarioModel.findOne({ email: usuarios.email })
-        .then((user) => {
-          if (!user) {
-            return res
-              .status(401)
-              .json({ message: "No se encontro el usuario" });
-          }
-          bcrypt.compare(password, user.password).then((result) => {
+      UsuarioModel.findOne({ email: usuarios.email }).then(user => {
+        if (!user) {
+          return res.status(401).json({ message: "No se encontro el usuario" });
+        }
+        bcrypt
+          .compare(password, user.password)
+          .then(result => {
             return result;
+          })
+          .then(result => {
+            console.log(result);
+            if (result) {
+              const token = jwt.sign(
+                {
+                  email: usuarios.email,
+                  userdId: usuarios._id
+                },
+                "putoElQueLee",
+                {
+                  expiresIn: "1h"
+                }
+              );
+              res.status(200).json({
+                token: token
+              });
+            } else {
+              res.status(401).json({
+                message: "badPassword"
+              });
+            }
+          })
+          .catch((error: any) => {
+            res.status(500).json({ error: error });
           });
-        })
-        .then((result) => {
-          if (result) {
-            const token = jwt.sign(
-              {
-                email: usuarios.email,
-                userdId: usuarios._id
-              },
-              "putoElQueLee",
-              {
-                expiresIn: "1h"
-              }
-            );
-            res.status(200).json({
-              token: token
-            });
-          } else {
-            res.status(401).json({
-              message: "badPassword"
-            });
-          }
-        })
-        .catch((error: any) => {
-          res.status(500).json({ error: error });
-        });
+      });
     } catch (error) {
       console.log(error);
     }
