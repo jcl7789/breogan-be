@@ -60,7 +60,7 @@ class UserController {
               });
             } else {
               res.status(401).json({
-                message: "badPassword"
+                message: "Contraseña incorrecta"
               });
             }
           })
