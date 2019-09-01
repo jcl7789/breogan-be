@@ -2,7 +2,6 @@ import { Response, Request } from "express";
 import UsuarioModel, { Usuario } from "../models/Usuario";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { cpus } from "os";
 
 class UserController {
   constructor() {}
@@ -50,13 +49,14 @@ class UserController {
                   email: usuarios.email,
                   userdId: usuarios._id
                 },
-                "putoElQueLee",
+                "PutoElQueLee",
                 {
                   expiresIn: "1h"
                 }
               );
               res.status(200).json({
-                token: token
+                token: token,
+                expiresIn: 3600
               });
             } else {
               res.status(401).json({
