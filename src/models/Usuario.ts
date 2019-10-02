@@ -7,12 +7,14 @@ export interface Usuario extends mongoose.Document {
   password: string;
   _id: ObjectID;
   activo: boolean;
+  numClie: string;
 }
 
 const UsuarioSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  activo: Boolean
+  activo: Boolean,
+  numClie: String
 });
 
 UsuarioSchema.plugin(uniqueValidator);
