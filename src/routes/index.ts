@@ -16,7 +16,7 @@ router.use('/profile', ProfilesRoutes);
 router.use('/sales', SalesRoutes);
 router.use('/schedule', ScheduleRoutes);
 router.use('/stats', StatsRoutes);
-router.use('/stock', StockRoutes);
+router.use('/products', StockRoutes);
 router.use('/brands', BrandsRoutes);
 router.use('/merchsTypes', MerchTypesRoutes);
 router.use('/users', UsersRoutes);

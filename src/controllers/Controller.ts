@@ -2,15 +2,9 @@ import { Response, Request } from 'express';
 
 import CategoriasModel, { Categorias } from './../models/Categorias';
 import MarcasModel, { Marcas } from './../models/Marcas';
-import VentasModel, { Ventas } from './../models/Ventas';
-import RenglonVentaModel, { RenglonVenta } from './../models/RenglonVenta';
 import UnidadesModel, { Unidades } from './../models/Unidades';
-import ProductosModel, { Productos } from './../models/Productos';
 
 class Controller {
-    ACTIVE = 1;
-    INACTIVE = 0;
-
     constructor() {
             
         }

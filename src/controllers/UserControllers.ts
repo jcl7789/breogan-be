@@ -18,7 +18,10 @@ class UserController {
         usuarios
           .save()
           .then(result => {
-            res.status(200).send({ message: result });
+            res.status(200).json({ 
+              id: result._id,
+              message: "Agregado"
+            });
           })
           .catch(error => {
             res.status(500).send({ error: error });
@@ -40,9 +43,6 @@ class UserController {
         bcrypt
           .compare(password, user.password)
           .then(result => {
-            return result;
-          })
-          .then(result => {
             if (result) {
               const token = jwt.sign(
                 {
@@ -56,7 +56,8 @@ class UserController {
               );
               res.status(200).json({
                 token: token,
-                expiresIn: 3600
+                expiresIn: 3600,
+                id: usuarios._id
               });
             } else {
               res.status(401).json({
@@ -71,6 +72,20 @@ class UserController {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  obtenerTodosUsers(req: Request, res: Response) {
+    UsuarioModel.find()
+        .then((result) => {
+            if (result.length > 0){
+                res.status(200).send(result);
+            } else {
+                res.status(204).send()
+            }
+        })
+        .catch((error) => {
+            res.status(500).send({code: -1, message: "Error"});
+        });
   }
 }
 

@@ -14,7 +14,7 @@ const UsuarioSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   activo: Boolean,
-  numClie: String
+  numClie: { type: String, unique: true }
 });
 
 UsuarioSchema.plugin(uniqueValidator);
