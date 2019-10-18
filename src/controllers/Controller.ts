@@ -4,6 +4,8 @@ import CategoriasModel, { Categorias } from './../models/Categorias';
 import MarcasModel, { Marcas } from './../models/Marcas';
 import UnidadesModel, { Unidades } from './../models/Unidades';
 
+import { INACTIVE } from './ControllerConstants';
+
 class Controller {
     constructor() {
             
@@ -72,8 +74,7 @@ class Controller {
     public async quitarMarcas(req: Request, res: Response) {
         try {
             const { id } = req.params;
-            const activo = 0;
-            const response = await MarcasModel.find(elem => { return elem == id }).update({ activo });
+            const response = await MarcasModel.find(elem => { return elem == id }).update({ INACTIVE });
             res.send(response);
         } catch (error) {
             console.log(error);
@@ -122,11 +123,11 @@ class Controller {
         try {
             const { id } = req.params;
             console.log(id);
-            await CategoriasModel.findByIdAndDelete(id);
-            res.send("Categoria removida");
+            const response = await CategoriasModel.find((elem) => { return elem == id }).update({ INACTIVE });
+            res.send(response);
         } catch (error) {
             console.log(error);
-            res.send('Error en la consulta.');
+            res.json({code: -1, message: 'Error en la consulta.'});
         }
     }
 

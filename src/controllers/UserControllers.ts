@@ -2,6 +2,8 @@ import { Response, Request } from "express";
 import UsuarioModel, { Usuario } from "../models/Usuario";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { SECRET_PASS } from "../constants";
+
 
 class UserController {
   constructor() {}
@@ -49,7 +51,7 @@ class UserController {
                   email: usuarios.email,
                   userdId: usuarios._id
                 },
-                "PutoElQueLee",
+                SECRET_PASS,
                 {
                   expiresIn: "1h"
                 }

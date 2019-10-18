@@ -1,0 +1,1 @@
+export const SECRET_PASS = 'Do_Not_Waste_Your_Time_Looking_Back_You_Are_Not_Going_That_Way';
