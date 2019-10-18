@@ -63,4 +63,4 @@ class Controller {
 	}
 }
 
-export const controller = new Controller();
+export const categorias_controller = new Controller();

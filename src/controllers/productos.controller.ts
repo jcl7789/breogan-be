@@ -33,7 +33,7 @@ class Controller {
     }
     
     // Read all
-    public async obtenerListaProducto(req: Request, res: Response) { 
+    public obtenerListaProducto(req: Request, res: Response) { 
         ProductosModel.find()
         .then((result) => {
             if (result.length > 0){
@@ -48,7 +48,7 @@ class Controller {
     }
 
     // Update
-    public async modificarProducto(req: Request, res: Response) {
+    public modificarProducto(req: Request, res: Response) {
         const id = req.params.id;
         const modifiedData: Productos = req.body;
         modifiedData._id = id;
@@ -66,7 +66,7 @@ class Controller {
 
     // Delete (Deactivate)
     // No se borra el producto, se lo desactiva
-    public async borrarProducto(req: Request, res: Response) {
+    public borrarProducto(req: Request, res: Response) {
         const id = req.params.id;
         res.status(200).send({code: 1, message: "Ok", object: id});
     }

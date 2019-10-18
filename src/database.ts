@@ -1,17 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose, { Connection } from 'mongoose';
+import * as autoIncrement from 'mongoose-auto-increment';
 import { mongodb } from './keys';
 
-export async function connect() {
-    try {
-        await mongoose.connect(mongodb.URI, {
-            useCreateIndex: true,
-            useNewUrlParser: true
-        }).then(() => {
-            console.log('Conectado a la base de datos');
-        });
-    } catch (error) {
-        
-    }
+export function connect() {
+    mongoose.connect(mongodb.URI, {
+        useCreateIndex: true,
+        useNewUrlParser: true
+    }).then((object) => {
+        autoIncrement.initialize(object.connection);
+        console.log('Conectado a la base de datos -> ', object.connection.db.databaseName);
+    }).catch((error) => {
+        console.error(error);
+    });
 }
 
 export default connect;

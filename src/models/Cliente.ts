@@ -1,7 +1,10 @@
 import mongoose, { Schema, model } from "mongoose";
-import DireccionModel, { Direccion } from "./Direccion";
-import TelefonoModel, { Telefono } from "./Telefono";
-import MascotaModel, { Mascota } from "./Mascota";
+import uniqueValidator from "mongoose-unique-validator";
+import { ObjectID } from "bson";
+
+import { Direccion } from "./Direccion";
+import { Telefono } from "./Telefono";
+import { Mascota } from "./Mascota";
 
 export interface Cliente extends mongoose.Document {
   numeroDni: number;
@@ -14,19 +17,21 @@ export interface Cliente extends mongoose.Document {
   telefonos: Telefono[];
   mascotas: Mascota[];
   fecNac: string;
+  user_id: String
 }
 
 const ClienteSchema = new Schema({
-  numeroDni: Number,
+  numeroDni: { type: Number, required: true, unique: true },
   tipoDni: Number,
   nombre: String,
   apellido: String,
   genero: String,
   condicionFiscal: String,
-  direccion: DireccionModel,
-  mascotas: [MascotaModel],
-  telefonos: [TelefonoModel],
-  fecNac: String
-});
+  direccion: Object,
+  mascotas: [Object],
+  telefonos: [Object],
+  fecNac: String,
+  user_id: { type: String, required: true, unique: true }
+}).plugin(uniqueValidator);
 
 export default model<Cliente>("Cliente", ClienteSchema);
