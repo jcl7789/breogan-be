@@ -1,15 +1,13 @@
 import mongoose, { Schema, model } from "mongoose";
 
 export interface Marcas extends mongoose.Document { 
-    identificador: number,
     nombre: string,
     activo: number
 }
 
 const MarcasSchema = new Schema({
-    identificador: Number,
-    nombre: String,
-    activo: Number
+    nombre: { type: String, required: true },
+    activo: { type: Number, required: true }
 });
 
 export default model<Marcas>('Marcas', MarcasSchema);

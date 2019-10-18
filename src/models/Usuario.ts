@@ -1,6 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 import { ObjectID } from "bson";
+import { isEmail } from "validator";
 
 export interface Usuario extends mongoose.Document {
   email: string;
@@ -11,7 +12,7 @@ export interface Usuario extends mongoose.Document {
 }
 
 const UsuarioSchema = new Schema({
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true, validate: [isEmail, 'notEmail'] },
   password: { type: String, required: true },
   activo: Boolean,
   numClie: { type: String, unique: true }

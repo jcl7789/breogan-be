@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { controller } from '../controllers/Controller';
+import { controller } from '../controllers/unidades.controller';
 
 const router: Router = Router();
 
-router.post('/add', controller.agregarUnidades);
-router.post('/mod/:id', controller.modificarUnidades);
-router.get('/con', controller.consultarUnidades);
-router.get('/rem/:id', controller.removerUnidades);
+router.post('/', controller.agregarUnidades);
+router.put('/:id', controller.modificarUnidades);
+router.get('/', controller.consultarUnidades);
+router.get('/:id', controller.consultarUnidad);
+router.delete('/:id', controller.removerUnidades);
 
 export default router;

@@ -1,5 +1,6 @@
-import ProductosModel, { Productos } from './../models/Productos';
+import ProductosModel, { Productos } from '../models/Productos';
 import { Response, Request } from 'express';
+import { sendErrorResponse } from './constants'
 
 class Controller {
     
@@ -11,7 +12,7 @@ class Controller {
         new ProductosModel(data).save().then((response) => {
             res.status(200).json({code: 1, message: "Agregado"});
         }).catch((error) => {
-            res.status(500).json({code:-1, message: "Error", error: error});
+            sendErrorResponse(error, res);
         });
     }
 
@@ -27,7 +28,7 @@ class Controller {
             }
         })
         .catch((error) => {
-            res.status(500).send({code: -1, message: "Error"});
+            sendErrorResponse(error, res);
         });
     }
     
@@ -36,20 +37,31 @@ class Controller {
         ProductosModel.find()
         .then((result) => {
             if (result.length > 0){
-                res.status(200).send(result);
+                res.status(200).json({productos: result});
             } else {
                 res.status(204).send()
             }
         })
-        .catch((error) => {
-            res.status(500).send({code: -1, message: "Error"});
+            .catch((error) => {
+                sendErrorResponse(error, res);
         });
     }
 
     // Update
     public async modificarProducto(req: Request, res: Response) {
-        const id = req.params.id; 
-        res.status(200).send({code: 1, message: "Ok", object: id});
+        const id = req.params.id;
+        const modifiedData: Productos = req.body;
+        modifiedData._id = id;
+        ProductosModel.updateOne({ _id: id }, modifiedData)
+        .then((response) => {
+            res.json({
+                code: 1,
+                object: response,
+                message: "Producto modificado"
+            });    
+        }).catch((error) => {
+            sendErrorResponse(error, res);
+        });
     }
 
     // Delete (Deactivate)

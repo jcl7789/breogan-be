@@ -17,11 +17,11 @@ export interface Ventas extends mongoose.Document {
 
 const VentasSchema = new Schema({
     numero_factura: { type: Number, required: true, unique: true },
-    tipo_factura: String,
-    fecha: Date,
-    client_name: String,
-    total: Number,
-    detalle: Array<RenglonVenta>()
+    tipo_factura: { type: String, required: true },
+    fecha: { type: Date, required: true },
+    client_name: { type: String, required: true },
+    total: { type: Number, required: true },
+    detalle: { type: Array<RenglonVenta>(), required: true }
 });
 
 VentasSchema.plugin(uniqueValidator);

@@ -21,7 +21,8 @@
     "mongoose": "^5.4.13",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "validator": "^11.1.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -31,6 +32,7 @@
     "@types/mongoose": "^5.3.19",
     "@types/mongoose-unique-validator": "^1.0.2",
     "@types/morgan": "^1.7.35",
+    "@types/validator": "^10.11.3",
     "jshint": "^2.10.1",
     "nodemon": "^1.18.10",
     "ts-lint": "^4.5.1",
