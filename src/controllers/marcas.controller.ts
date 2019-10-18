@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import MarcasModel, { Marcas } from '../models/Marcas';
-import { INACTIVE, sendErrorResponse, ACTIVE } from './constants';
+import { INACTIVE, sendErrorResponse, ACTIVE } from './constants.controller';
 
 class Controller {
 

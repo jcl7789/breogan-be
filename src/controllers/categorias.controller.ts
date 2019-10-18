@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import CategoriasModel, { Categorias } from '../models/Categorias';
-import { INACTIVE, sendErrorResponse } from './constants';
+import { INACTIVE, sendErrorResponse } from './constants.controller';
 
 class Controller {
 	constructor() {}

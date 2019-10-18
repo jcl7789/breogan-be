@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import UnidadesModel, { Unidades } from '../models/Unidades';
-import { INACTIVE, sendErrorResponse } from './constants';
+import { sendErrorResponse } from './constants.controller';
 
 class Controller {
 
