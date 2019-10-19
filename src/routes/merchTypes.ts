@@ -3,9 +3,9 @@ import { categoriasController } from '../controllers/categorias.controller';
 
 const router: Router = Router();
 
-router.post('/', categoriasController.agregarCategorias);
-router.delete('/:id', categoriasController.removerCategorias);
-router.put('/:id', categoriasController.modificarCategorias);
+router.post('/', categoriasController.agregarCategoria);
+router.delete('/:id', categoriasController.removerCategoria);
+router.put('/:id', categoriasController.modificarCategoria);
 router.get('/', categoriasController.consultarCategorias);
 
 export default router;

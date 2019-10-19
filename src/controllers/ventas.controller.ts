@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import VentasModel, { Ventas } from '../models/Venta';
+import VentaModel, { Venta } from '../models/Venta';
 import { sendErrorResponse } from './shared';
 
 class Controller {
@@ -13,7 +13,7 @@ class Controller {
 
     // Read all
     public obtenerVentas(req: Request, res: Response) {
-        VentasModel.find()
+        VentaModel.find()
             .then((result) => {
                 if (result.length > 0) {
                     res.status(200).json({ ventas: result });
@@ -30,7 +30,7 @@ class Controller {
     public obtenerVenta(req: Request, res: Response) {
         const id = req.params.id;
         try {
-            VentasModel.findOne({ _id: id })
+            VentaModel.findOne({ _id: id })
                 .then((result) => {
                     if (result) {
                         res.status(200).json({ ventas: result });
@@ -49,9 +49,9 @@ class Controller {
     // Update
     public modificarVenta(req: Request, res: Response) {
         const id = req.params.id;
-        const modifiedData: Ventas = req.body;
+        const modifiedData: Venta = req.body;
         modifiedData._id = id;
-        VentasModel.updateOne({ _id: id }, modifiedData)
+        VentaModel.updateOne({ _id: id }, modifiedData)
         .then((response) => {
             res.json({
                 code: 1,

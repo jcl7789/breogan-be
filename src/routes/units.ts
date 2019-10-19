@@ -3,10 +3,10 @@ import { unitsController } from '../controllers/unidades.controller';
 
 const router: Router = Router();
 
-router.post('/', unitsController.agregarUnidades);
-router.put('/:id', unitsController.modificarUnidades);
+router.post('/', unitsController.agregarUnidad);
+router.put('/:id', unitsController.modificarUnidad);
 router.get('/', unitsController.consultarUnidades);
 router.get('/:id', unitsController.consultarUnidad);
-router.delete('/:id', unitsController.removerUnidades);
+router.delete('/:id', unitsController.removerUnidad);
 
 export default router;

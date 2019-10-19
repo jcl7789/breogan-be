@@ -1,13 +1,13 @@
 import mongoose, { Schema, model } from "mongoose";
 
-export interface Marcas extends mongoose.Document { 
+export interface Marca extends mongoose.Document { 
     nombre: string,
     activo: number
 }
 
-const MarcasSchema = new Schema({
+const MarcaSchema = new Schema({
     nombre: { type: String, required: true },
     activo: { type: Number, required: true }
 });
 
-export default model<Marcas>('Marcas', MarcasSchema);
+export default model<Marca>('Marca', MarcaSchema);

@@ -1,16 +1,16 @@
 import { Response, Request } from 'express';
 
-import UnidadesModel, { Unidades } from '../models/Unidad';
+import UnidadModel, { Unidad } from '../models/Unidad';
 import { sendErrorResponse } from './shared';
 
 class Controller {
 
     constructor() {}
 
-    // Unidades
-    public agregarUnidades(req: Request, res: Response) {
+    // Unidad
+    public agregarUnidad(req: Request, res: Response) {
         const { medida } = req.body;
-        const medidas: Unidades = new UnidadesModel({
+        const medidas: Unidad = new UnidadModel({
             medida: String(medida).toUpperCase()
         });
         medidas.save()
@@ -26,9 +26,9 @@ class Controller {
             })
     }
 
-    public removerUnidades(req: Request, res: Response) {
+    public removerUnidad(req: Request, res: Response) {
         const { id }  = req.params;
-        UnidadesModel.findByIdAndDelete(id)
+        UnidadModel.findByIdAndDelete(id)
             .then((response) => {
                 res.json({
                     code: 1,
@@ -41,14 +41,14 @@ class Controller {
             });
     }
 
-    public modificarUnidades(req: Request, res: Response) {
+    public modificarUnidad(req: Request, res: Response) {
         const { id } = req.params;
         const { medida } = req.body;
-        const unit: Unidades = new UnidadesModel({
+        const unit: Unidad = new UnidadModel({
             _id: id,
             medida: String(medida).toUpperCase()
         })
-        UnidadesModel.updateOne({ _id: id }, unit)
+        UnidadModel.updateOne({ _id: id }, unit)
             .then((response) => {
                 const fueModificado = response.nModified
                 if (fueModificado !== 0) {
@@ -72,7 +72,7 @@ class Controller {
 
     public async consultarUnidades(req: Request, res: Response) {
         try {
-            const unidades = await UnidadesModel.find();
+            const unidades = await UnidadModel.find();
             res.json(unidades);
         } catch (error) {
             sendErrorResponse(error, res);
@@ -82,7 +82,7 @@ class Controller {
     public async consultarUnidad(req: Request, res: Response) {
         try {
             const id = req.params.id;
-            const unidades = await UnidadesModel.findOne({
+            const unidades = await UnidadModel.findOne({
                 _id: id
             });
             res.json(unidades);

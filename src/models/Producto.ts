@@ -2,7 +2,7 @@ import mongoose, { Schema, model } from "mongoose";
 import { ObjectID } from "mongodb";
 import uniqueValidator from "mongoose-unique-validator";
 
-export interface Productos extends mongoose.Document {
+export interface Producto extends mongoose.Document {
     _id: ObjectID,
     codigo: number,
     categoria: string,
@@ -16,7 +16,7 @@ export interface Productos extends mongoose.Document {
     vigente: boolean
 }
 
-const ProductosSchema = new Schema({
+const ProductoSchema = new Schema({
     codigo: { type: Number, required: true, unique: true },
     categoria: String,
     marca: String,
@@ -29,6 +29,6 @@ const ProductosSchema = new Schema({
     vigente: Boolean
 });
 
-ProductosSchema.plugin(uniqueValidator);
+ProductoSchema.plugin(uniqueValidator);
 
-export default model<Productos>('Productos', ProductosSchema);
+export default model<Producto>('Producto', ProductoSchema);

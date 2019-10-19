@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import MarcasModel, { Marcas } from '../models/Marca';
+import MarcaModel, { Marca } from '../models/Marca';
 import { INACTIVE, sendErrorResponse, ACTIVE } from './shared';
 
 class Controller {
@@ -10,7 +10,7 @@ class Controller {
     public async agregarMarca(req: Request, res: Response) {
         try {
             const { identificador, nombre } = req.body;
-            const response = await new MarcasModel({
+            const response = await new MarcaModel({
                 identificador: identificador,
                 nombre: nombre,
                 activo: ACTIVE
@@ -25,11 +25,11 @@ class Controller {
 
     public activarMarca(req: Request, res: Response) {
         const { id } = req.params;
-        const brand: Marcas = new MarcasModel({
+        const brand: Marca = new MarcaModel({
             _id: id,
             activo: ACTIVE
         })
-        MarcasModel.updateOne({ _id: id }, brand)
+        MarcaModel.updateOne({ _id: id }, brand)
             .then((response) => {
                 res.json({
                     code: 1,
@@ -44,7 +44,7 @@ class Controller {
     // Uso interno unicamente
     public quitarMarca(req: Request, res: Response) { 
         const id  = req.params.id;
-        MarcasModel.findByIdAndDelete(id)
+        MarcaModel.findByIdAndDelete(id)
         .then((response) => {
             res.json({ code: 1, object: response, message: "Marca removida" });
         }).catch((error) => {
@@ -54,11 +54,11 @@ class Controller {
 
     public desactivarMarca(req: Request, res: Response) {
         const { id } = req.params;
-        const brand: Marcas = new MarcasModel({
+        const brand: Marca = new MarcaModel({
             _id: id,
             activo: INACTIVE
         })
-        MarcasModel.updateOne({ _id: id }, brand)
+        MarcaModel.updateOne({ _id: id }, brand)
         .then((response) => {
             res.json({ code: 1, object: response, message: "Marca desactivada" });
         }).catch((error) => {
@@ -69,8 +69,8 @@ class Controller {
     public modificarMarca(req: Request, res: Response) {
         const { id } = req.params;
         const { nombre } = req.body;
-        const brand: Marcas = new MarcasModel({ nombre: nombre, _id: id });
-        MarcasModel.updateOne({ _id: id }, brand)
+        const brand: Marca = new MarcaModel({ nombre: nombre, _id: id });
+        MarcaModel.updateOne({ _id: id }, brand)
         .then((response) => {
             res.json({
                 code: 1,
@@ -83,10 +83,10 @@ class Controller {
     }
 
     public obtenerMarcas(req: Request, res: Response) {
-        MarcasModel.find()
-            .then((marcas) => {
-                if (marcas.length > 0) {
-                    res.status(200).json({marcas});
+        MarcaModel.find()
+            .then((Marca) => {
+                if (Marca.length > 0) {
+                    res.status(200).json({Marca});
                 } else {
                     res.status(204).send();
                 }
@@ -97,12 +97,12 @@ class Controller {
     
     public obtenerMarca(req: Request, res: Response) {
         const id = req.params.id;
-        MarcasModel.findOne({ _id: id })
+        MarcaModel.findOne({ _id: id })
             .then((marca) => {
                 if (!marca) {
                     res.status(204).send();
                 } else {
-                    res.status(200).json({marcas: marca});
+                    res.status(200).json({Marca: marca});
                 }
         }).catch((error) => {
             sendErrorResponse(error, res);

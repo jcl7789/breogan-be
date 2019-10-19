@@ -1,4 +1,4 @@
-import ProductosModel, { Productos } from '../models/Producto';
+import ProductoModel, { Producto } from '../models/Producto';
 import { Response, Request } from 'express';
 import { sendErrorResponse, INACTIVE, ACTIVE } from './shared'
 
@@ -8,8 +8,8 @@ class Controller {
 
     // Create
     public agregarProducto(req: Request, res: Response) { 
-        const data: Productos = req.body;
-        new ProductosModel(data).save().then((response) => {
+        const data: Producto = req.body;
+        new ProductoModel(data).save().then((response) => {
             res.status(200).json({code: 1, message: "Agregado"});
         }).catch((error) => {
             sendErrorResponse(error, res);
@@ -19,12 +19,12 @@ class Controller {
     // Read
     public obtenerProducto(req: Request, res: Response) {
         const id = req.params.id;
-        ProductosModel.findOne({_id: id})
+        ProductoModel.findOne({_id: id})
         .then( (product) => {
             if (!product) {
                 return res.status(204).send();
             } else {
-                res.status(200).json({productos: product});
+                res.status(200).json({Producto: product});
             }
         })
         .catch((error) => {
@@ -34,10 +34,10 @@ class Controller {
     
     // Read all
     public obtenerProductos(req: Request, res: Response) { 
-        ProductosModel.find()
+        ProductoModel.find()
         .then((result) => {
             if (result.length > 0){
-                res.status(200).json({productos: result});
+                res.status(200).json({Producto: result});
             } else {
                 res.status(204).send()
             }
@@ -50,9 +50,9 @@ class Controller {
     // Update
     public modificarProducto(req: Request, res: Response) {
         const id = req.params.id;
-        const modifiedData: Productos = req.body;
+        const modifiedData: Producto = req.body;
         modifiedData._id = id;
-        ProductosModel.updateOne({ _id: id }, modifiedData)
+        ProductoModel.updateOne({ _id: id }, modifiedData)
         .then((response) => {
             res.json({
                 code: 1,
@@ -68,7 +68,7 @@ class Controller {
     // No se borra el producto, se lo desactiva
     public borrarProducto(req: Request, res: Response) {
         const id = req.params.id;
-        ProductosModel.updateOne({ _id: id }, {activo: INACTIVE})
+        ProductoModel.updateOne({ _id: id }, {activo: INACTIVE})
         .then((response) => {
             res.json({
                 code: 1,
@@ -83,7 +83,7 @@ class Controller {
     // Reagregar (Reactivate)
     public activarProducto(req: Request, res: Response) {
         const id = req.params.id;
-        ProductosModel.updateOne({ _id: id }, {activo: ACTIVE})
+        ProductoModel.updateOne({ _id: id }, {activo: ACTIVE})
         .then((response) => {
             res.json({
                 code: 1,

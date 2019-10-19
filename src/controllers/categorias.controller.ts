@@ -1,16 +1,16 @@
 import { Response, Request } from 'express';
 
-import CategoriasModel, { Categorias } from '../models/Categorias';
+import CategoriaModel, { Categoria } from '../models/Categoria';
 import { INACTIVE, sendErrorResponse } from './shared';
 
 class Controller {
 	constructor() {}
 
-	// Categorias
-	public async agregarCategorias(req: Request, res: Response) {
+	// Categoria
+	public async agregarCategoria(req: Request, res: Response) {
 		try {
 			const { identificador, nombre } = req.body;
-			const categorias: Categorias = new CategoriasModel({
+			const categorias: Categoria = new CategoriaModel({
 				identificador,
 				nombre
 			});
@@ -21,11 +21,11 @@ class Controller {
 		}
 	}
 
-	public async removerCategorias(req: Request, res: Response) {
+	public async removerCategoria(req: Request, res: Response) {
 		try {
 			const { id } = req.params;
 			console.log(id);
-			const response = await CategoriasModel.find(elem => {
+			const response = await CategoriaModel.find(elem => {
 				return elem == id;
 			}).update({
 				INACTIVE
@@ -36,10 +36,10 @@ class Controller {
 		}
 	}
 
-	public async modificarCategorias(req: Request, res: Response) {
+	public async modificarCategoria(req: Request, res: Response) {
 		try {
 			const { identificador, nombre } = req.body;
-			const categorias: Categorias = new CategoriasModel({
+			const categorias: Categoria = new CategoriaModel({
 				identificador,
 				nombre
 			});
@@ -55,7 +55,7 @@ class Controller {
 
 	public async consultarCategorias(req: Request, res: Response) {
 		try {
-			const categorias = await CategoriasModel.find();
+			const categorias = await CategoriaModel.find();
 			res.json(categorias);
 		} catch (error) {
 			sendErrorResponse(error, res);

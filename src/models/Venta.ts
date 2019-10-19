@@ -5,7 +5,7 @@ import { ObjectID } from "bson";
 import { RenglonVenta } from "./RenglonVenta";
 
 
-export interface Ventas extends mongoose.Document { 
+export interface Venta extends mongoose.Document { 
     _id: ObjectID,
     numero_factura: number,
     tipo_factura: string,
@@ -15,7 +15,7 @@ export interface Ventas extends mongoose.Document {
     detalle: RenglonVenta[]
 }
 
-const VentasSchema = new Schema({
+const VentaSchema = new Schema({
     numero_factura: { type: Number, required: true, unique: true },
     tipo_factura: { type: String, required: true },
     fecha: { type: Date, required: true },
@@ -24,6 +24,6 @@ const VentasSchema = new Schema({
     detalle: { type: Array<RenglonVenta>(), required: true }
 });
 
-VentasSchema.plugin(uniqueValidator);
+VentaSchema.plugin(uniqueValidator);
 
-export default model<Ventas>('Ventas', VentasSchema);
+export default model<Venta>('Venta', VentaSchema);
