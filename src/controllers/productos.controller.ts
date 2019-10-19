@@ -1,6 +1,6 @@
 import ProductosModel, { Productos } from '../models/Productos';
 import { Response, Request } from 'express';
-import { sendErrorResponse } from './constants.controller'
+import { sendErrorResponse } from './shared'
 
 class Controller {
     

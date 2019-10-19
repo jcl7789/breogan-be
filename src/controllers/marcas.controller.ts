@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import MarcasModel, { Marcas } from '../models/Marcas';
-import { INACTIVE, sendErrorResponse, ACTIVE } from './constants.controller';
+import { INACTIVE, sendErrorResponse, ACTIVE } from './shared';
 
 class Controller {
 
@@ -110,4 +110,4 @@ class Controller {
     }
 }
 
-export const controller = new Controller();
+export const brandsController = new Controller();

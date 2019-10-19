@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import { sendErrorResponse, sendErrorMessageResponse } from './constants.controller';
+import { sendErrorResponse, sendErrorMessageResponse } from './shared';
 import ClienteModel, { Cliente } from '../models/Cliente';
 
 
@@ -73,4 +73,4 @@ class Controller {
 
 }
 
-export const clientes_controller = new Controller();
+export const clientsController = new Controller();

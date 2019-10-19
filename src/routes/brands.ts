@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { controller } from '../controllers/marcas.controller';
+import { brandsController } from '../controllers/marcas.controller';
 
 const router: Router = Router();
 
-router.post('/', controller.agregarMarca);
-router.post('/:id', controller.activarMarca);
-router.delete('/:id', controller.quitarMarca);
-router.patch('/:id', controller.desactivarMarca);
-router.put('/:id', controller.modificarMarca);
-router.get('/:id', controller.obtenerMarca);
-router.get('/', controller.obtenerMarcas);
+router.post('/', brandsController.agregarMarca);
+router.post('/:id', brandsController.activarMarca);
+router.delete('/:id', brandsController.quitarMarca);
+router.patch('/:id', brandsController.desactivarMarca);
+router.put('/:id', brandsController.modificarMarca);
+router.get('/:id', brandsController.obtenerMarca);
+router.get('/', brandsController.obtenerMarcas);
 
 export default router;

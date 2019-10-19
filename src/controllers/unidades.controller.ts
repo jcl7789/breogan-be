@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import UnidadesModel, { Unidades } from '../models/Unidades';
-import { sendErrorResponse } from './constants.controller';
+import { sendErrorResponse } from './shared';
 
 class Controller {
 
@@ -92,7 +92,7 @@ class Controller {
     }
 }
 
-export const controller = new Controller();
+export const unitsController = new Controller();
 
 /**
  * response.render() -> devuelve un HTML

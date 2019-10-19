@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 import UsuarioModel, { Usuario } from "../models/Usuario";
 import { SECRET_PASS } from "../constants";
-import { sendErrorResponse, ACTIVE } from "./constants.controller";
+import { sendErrorResponse, ACTIVE } from "./shared";
 
 
 class UserController {

@@ -1,14 +1,17 @@
-import { Router, Request, Response } from 'express';
-import { clientes_controller } from '../controllers/clientes.controller';
+import { Router } from 'express';
+import { clientsController } from '../controllers/clientes.controller';
+import { defaultController } from '../controllers/shared';
 
 const router: Router = Router();
 
 // C
-router.post('/', clientes_controller.nuevoCliente)
+router.post('/', clientsController.nuevoCliente);
 // R
-router.get('/:id', clientes_controller.obtenerCliente)
-router.get('/', clientes_controller.obtenerClientes)
+router.get('/:id', clientsController.obtenerCliente);
+router.get('/', clientsController.obtenerClientes);
 // U
-router.put('/:id', clientes_controller.modificarCliente)
+router.put('/:id', clientsController.modificarCliente);
+// D 
+router.delete('/', defaultController.sinImplementar);
 
 export default router;

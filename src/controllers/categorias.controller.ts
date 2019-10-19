@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import CategoriasModel, { Categorias } from '../models/Categorias';
-import { INACTIVE, sendErrorResponse } from './constants.controller';
+import { INACTIVE, sendErrorResponse } from './shared';
 
 class Controller {
 	constructor() {}
@@ -63,4 +63,4 @@ class Controller {
 	}
 }
 
-export const categorias_controller = new Controller();
+export const categoriasController = new Controller();
