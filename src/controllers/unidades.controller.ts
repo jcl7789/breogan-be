@@ -58,14 +58,10 @@ class Controller {
                         message: "Unidad modificada"
                     });
                 } else {
-                    res.status(204).json({
-                        code: fueModificado,
-                        object: response,
-                        message: "Sin cambios"
-                    })
+                    res.status(204);
                 }
-
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 sendErrorResponse(error, res);
             });
     }
@@ -73,7 +69,7 @@ class Controller {
     public async consultarUnidades(req: Request, res: Response) {
         try {
             const unidades = await UnidadModel.find();
-            res.json(unidades);
+            res.send(unidades);
         } catch (error) {
             sendErrorResponse(error, res);
         }
@@ -85,7 +81,7 @@ class Controller {
             const unidades = await UnidadModel.findOne({
                 _id: id
             });
-            res.json(unidades);
+            res.send(unidades);
         } catch (error) {
             sendErrorResponse(error, res);
         }

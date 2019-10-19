@@ -24,7 +24,7 @@ class Controller {
             if (!product) {
                 return res.status(204).send();
             } else {
-                res.status(200).json({Producto: product});
+                res.status(200).send(product);
             }
         })
         .catch((error) => {
@@ -37,7 +37,7 @@ class Controller {
         ProductoModel.find()
         .then((result) => {
             if (result.length > 0){
-                res.status(200).json({Producto: result});
+                res.status(200).send(result);
             } else {
                 res.status(204).send()
             }

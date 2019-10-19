@@ -84,9 +84,9 @@ class Controller {
 
     public obtenerMarcas(req: Request, res: Response) {
         MarcaModel.find()
-            .then((Marca) => {
-                if (Marca.length > 0) {
-                    res.status(200).json({Marca});
+            .then((marcas) => {
+                if (marcas.length > 0) {
+                    res.status(200).send(marcas);
                 } else {
                     res.status(204).send();
                 }
@@ -99,10 +99,10 @@ class Controller {
         const id = req.params.id;
         MarcaModel.findOne({ _id: id })
             .then((marca) => {
-                if (!marca) {
-                    res.status(204).send();
+                if (marca) {
+                    res.status(200).send(marca);
                 } else {
-                    res.status(200).json({Marca: marca});
+                    res.status(204).send();
                 }
         }).catch((error) => {
             sendErrorResponse(error, res);

@@ -14,9 +14,9 @@ class Controller {
     // Read all
     public obtenerVentas(req: Request, res: Response) {
         VentaModel.find()
-            .then((result) => {
-                if (result.length > 0) {
-                    res.status(200).json({ ventas: result });
+            .then((ventas) => {
+                if (ventas.length > 0) {
+                    res.status(200).send(ventas);
                 } else {
                     res.status(204).send();
                 }
@@ -31,9 +31,9 @@ class Controller {
         const id = req.params.id;
         try {
             VentaModel.findOne({ _id: id })
-                .then((result) => {
-                    if (result) {
-                        res.status(200).json({ ventas: result });
+                .then((venta) => {
+                    if (venta) {
+                        res.status(200).send(venta);
                     } else {
                         res.status(204).send();
                     }
@@ -51,11 +51,11 @@ class Controller {
         const id = req.params.id;
         const modifiedData: Venta = req.body;
         modifiedData._id = id;
-        VentaModel.updateOne({ _id: id }, modifiedData)
-        .then((response) => {
+        VentaModel.updateOne(id, modifiedData)
+        .then((result) => {
             res.json({
                 code: 1,
-                object: response,
+                object: result,
                 message: "Producto modificado"
             });    
         }).catch((error) => {
@@ -66,6 +66,17 @@ class Controller {
     // Delete
     public cancelarVenta(req: Request, res: Response) {
         const id = req.params.id;
+        VentaModel.findByIdAndDelete(id)
+            .then((result) => {
+                res.json({
+                    code: 1,
+                    object: result,
+                    message: "Producto eliminado"
+                }); 
+            })
+            .catch((error) => {
+                sendErrorResponse(error, res);
+            });
     }
 }
 

@@ -43,9 +43,9 @@ class Controller {
     // Read All
     public obtenerClientes(req: Request, res: Response) { 
         ClienteModel.find()
-        .then((result) => {
-            if (result.length > 0){
-                res.status(200).json({clientes: result});
+        .then((clientes) => {
+            if (clientes.length > 0){
+                res.status(200).send(clientes);
             } else {
                 res.status(204).send()
             }
