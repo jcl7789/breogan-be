@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import UnidadesModel, { Unidades } from '../models/Unidades';
+import UnidadesModel, { Unidades } from '../models/Unidad';
 import { sendErrorResponse } from './shared';
 
 class Controller {

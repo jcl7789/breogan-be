@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import MarcasModel, { Marcas } from '../models/Marcas';
+import MarcasModel, { Marcas } from '../models/Marca';
 import { INACTIVE, sendErrorResponse, ACTIVE } from './shared';
 
 class Controller {

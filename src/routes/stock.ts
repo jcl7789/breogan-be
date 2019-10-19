@@ -5,12 +5,20 @@ const router: Router = Router();
 
 // Create
 router.post('/', productsController.agregarProducto);
+
+// Create (Reactivate)
+router.post('/:id', productsController.activarProducto);
+
 // Read
 router.get('/:id', productsController.obtenerProducto);
-router.get('/', productsController.obtenerListaProducto);
+
+// Read all
+router.get('/', productsController.obtenerProductos);
+
 // Update
 router.put('/:id', productsController.modificarProducto);
-// Delete
+
+// Delete (Deactivate)
 router.delete('/:id', productsController.borrarProducto);
 
 export default router;

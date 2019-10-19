@@ -1,6 +1,6 @@
-import ProductosModel, { Productos } from '../models/Productos';
+import ProductosModel, { Productos } from '../models/Producto';
 import { Response, Request } from 'express';
-import { sendErrorResponse } from './shared'
+import { sendErrorResponse, INACTIVE, ACTIVE } from './shared'
 
 class Controller {
     
@@ -33,7 +33,7 @@ class Controller {
     }
     
     // Read all
-    public obtenerListaProducto(req: Request, res: Response) { 
+    public obtenerProductos(req: Request, res: Response) { 
         ProductosModel.find()
         .then((result) => {
             if (result.length > 0){
@@ -42,8 +42,8 @@ class Controller {
                 res.status(204).send()
             }
         })
-            .catch((error) => {
-                sendErrorResponse(error, res);
+        .catch((error) => {
+            sendErrorResponse(error, res);
         });
     }
 
@@ -68,7 +68,31 @@ class Controller {
     // No se borra el producto, se lo desactiva
     public borrarProducto(req: Request, res: Response) {
         const id = req.params.id;
-        res.status(200).send({code: 1, message: "Ok", object: id});
+        ProductosModel.updateOne({ _id: id }, {activo: INACTIVE})
+        .then((response) => {
+            res.json({
+                code: 1,
+                object: response,
+                message: "Producto desactivado"
+            });    
+        }).catch((error) => {
+            sendErrorResponse(error, res);
+        });
+    }
+    
+    // Reagregar (Reactivate)
+    public activarProducto(req: Request, res: Response) {
+        const id = req.params.id;
+        ProductosModel.updateOne({ _id: id }, {activo: ACTIVE})
+        .then((response) => {
+            res.json({
+                code: 1,
+                object: response,
+                message: "Producto activado"
+            });    
+        }).catch((error) => {
+            sendErrorResponse(error, res);
+        });
     }
 
 }

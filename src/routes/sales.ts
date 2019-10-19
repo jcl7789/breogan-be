@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { salesController } from './../controllers/ventas.controller';
 
 const router: Router = Router();
@@ -10,7 +10,7 @@ router.post('/', salesController.registrarVenta);
 router.get('/:id', salesController.obtenerVenta);
 
 // Read All
-router.get('/', salesController.obtenerTodasLasVentas);
+router.get('/', salesController.obtenerVentas);
 
 // Update
 router.patch('/:id', salesController.registrarVenta);
