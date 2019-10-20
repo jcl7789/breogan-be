@@ -11,6 +11,7 @@ export const sendErrorResponse = (error: any, res: Response, msg?: string) => {
         const values = error.errors ? Object.values<any>(error.errors) : [{ 'kind': 'null', 'path': 'Object' }];
         res.json({
             'code': -1,
+            'result': 'fail',
             'message': msg,
             'error': {
                 'kind': values[0].kind,
