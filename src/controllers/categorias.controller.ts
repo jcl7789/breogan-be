@@ -7,47 +7,54 @@ class Controller {
 	constructor() {}
 
 	// Categoria
-	public async agregarCategoria(req: Request, res: Response) {
+	public agregarCategoria(req: Request, res: Response) {
 		try {
-			const { identificador, nombre } = req.body;
-			const categorias: Categoria = new CategoriaModel({
-				identificador,
-				nombre
+			const requestData: Categoria = req.body;
+			new CategoriaModel(requestData).save({validateBeforeSave: true})
+			.then((response) => {
+				res.status(200).json({ code: 1, message: "Agregado", object: response });
+			})
+			.catch((error) => {
+				sendErrorResponse(error, res);
 			});
-			await categorias.save();
-			res.send('Categoria agregada');
 		} catch (error) {
-			sendErrorResponse(error, res);
+			sendErrorResponse(error, res, 'fail');
 		}
 	}
 
-	public async removerCategoria(req: Request, res: Response) {
+	public removerCategoria(req: Request, res: Response) {
 		try {
 			const { id } = req.params;
-			console.log(id);
-			const response = await CategoriaModel.find(elem => {
-				return elem == id;
-			}).update({
-				INACTIVE
-			});
-			res.send(response);
+			CategoriaModel.findByIdAndDelete({ _id: id })
+				.then((response) => {
+					res.json({
+						code: 1,
+						object: response,
+						message: "Unidad removida"
+					})
+				})
+				.catch((error) => { 
+					sendErrorResponse(error, res, 'Error al intentar eliminar la categoria');		
+				});
 		} catch (error) {
 			sendErrorResponse(error, res);
 		}
 	}
 
-	public async modificarCategoria(req: Request, res: Response) {
+	public modificarCategoria(req: Request, res: Response) {
 		try {
-			const { identificador, nombre } = req.body;
-			const categorias: Categoria = new CategoriaModel({
-				identificador,
-				nombre
-			});
-			const response = await categorias.update(categorias._id);
-			res.json({
-				code: response,
-				message: 'Modificacion exitosa.'
-			});
+			const { id } = req.params;
+			const modifiedData: Categoria = req.body;
+			CategoriaModel.updateOne({ _id: id }, modifiedData)
+				.then((response) => {
+					res.json({
+						code: response,
+						message: 'Modificacion exitosa.'
+					});
+				})
+				.catch((error) => {
+					sendErrorResponse(error, res);
+				});
 		} catch (error) {
 			sendErrorResponse(error, res);
 		}

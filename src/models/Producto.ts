@@ -6,6 +6,7 @@ export interface Producto extends mongoose.Document {
     _id: ObjectID,
     codigo: number,
     categoria: string,
+    subcategoria: string,
     marca: string,
     nombre: string,
     presentacion: string,
@@ -19,6 +20,7 @@ export interface Producto extends mongoose.Document {
 const ProductoSchema = new Schema({
     codigo: { type: Number, required: true, unique: true },
     categoria: String,
+    subcategoria: String,
     marca: String,
     nombre: String,
     presentacion: Number,
