@@ -21,7 +21,7 @@ const VentaSchema = new Schema({
     fecha: { type: Date, required: true },
     client_name: { type: String, required: true },
     total: { type: Number, required: true },
-    detalle: { type: Array<RenglonVenta>(), required: true }
+    detalle: { type: [Object], required: true }
 });
 
 VentaSchema.plugin(uniqueValidator);
