@@ -3,6 +3,10 @@ import { Request, Response } from 'express';
 export const ACTIVE = 1;
 export const INACTIVE = 0;
 
+export const ADMIN = 0;
+export const EMPLOYEE = 1;
+export const CLIENT = 2;
+
 export const sendErrorResponse = (error: any, res: Response, msg?: string) => {
     if (!msg) {
         msg = 'Hubo un error en la consulta';
@@ -37,6 +41,18 @@ class Controller {
         res.status(405).send();
     }
     
+}
+
+export class ResponseData {
+    private code: number;
+    private object: Object;
+    private msg: string;
+
+    constructor(object: any, msg: string) {
+        this.code = 1;
+        this.object = object;
+        this.msg = msg;
+    }
 }
 
 export const defaultController = new Controller();

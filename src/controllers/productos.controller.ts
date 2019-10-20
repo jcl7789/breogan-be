@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import moment = require('moment-timezone');
 
-import { sendErrorResponse, INACTIVE, ACTIVE } from './shared'
+import { sendErrorResponse, INACTIVE, ACTIVE, ResponseData } from './shared'
 import ProductoModel, { Producto } from '../models/Producto';
 import { ObjectID } from 'bson';
 
@@ -15,7 +15,7 @@ class Controller {
         const data: Producto = req.body;
         Object.assign(data, { 'fechaUltimoMovimiento': moment().format() });
         new ProductoModel(data).save().then((response) => {
-            res.status(200).json({ code: 1, message: "Agregado", object: response });
+            res.status(200).send(new ResponseData(response, "Producto agregado"));
         }).catch((error) => {
             sendErrorResponse(error, res);
         });

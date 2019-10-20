@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import CategoriaModel, { Categoria } from '../models/Categoria';
-import { INACTIVE, sendErrorResponse } from './shared';
+import { sendErrorResponse, ResponseData } from './shared';
 
 class Controller {
 	constructor() {}
@@ -12,7 +12,7 @@ class Controller {
 			const requestData: Categoria = req.body;
 			new CategoriaModel(requestData).save({validateBeforeSave: true})
 			.then((response) => {
-				res.status(200).json({ code: 1, message: "Agregado", object: response });
+				res.status(200).send(new ResponseData(response, "Categoria agregada"));
 			})
 			.catch((error) => {
 				sendErrorResponse(error, res);

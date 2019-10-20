@@ -2,9 +2,10 @@ import { Router, Request, Response } from 'express';
 
 const router: Router = Router();
 
-router.get('/',
-    (req:Request, res:Response) => {
-        res.send('Schedule');
-    });
+const responder = (req:Request, res:Response): void => {
+        res.status(501).send();
+}
+
+router.all('/', responder);
     
 export default router;

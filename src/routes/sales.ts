@@ -13,10 +13,10 @@ router.get('/:id', salesController.obtenerVenta);
 router.get('/', salesController.obtenerVentas);
 
 // Update
-router.patch('/:id', salesController.registrarVenta);
+router.patch('/:id', salesController.modificarVenta);
 
 // Delete
-router.delete('/:id', salesController.registrarVenta);
+router.delete('/:id', salesController.cancelarVenta);
 
 
 export default router;

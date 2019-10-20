@@ -9,11 +9,13 @@ export interface Usuario extends mongoose.Document {
   _id: ObjectID;
   activo: boolean;
   numClie: string;
+  tipo: number;
 }
 
 const UsuarioSchema = new Schema({
   email: { type: String, required: true, unique: true, validate: [isEmail, 'notEmail'] },
   password: { type: String, required: true },
+  tipo: { type: Number, required: true },
   activo: Boolean,
   numClie: { type: String, unique: true }
 });

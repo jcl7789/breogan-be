@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 
 import MarcaModel, { Marca } from '../models/Marca';
-import { INACTIVE, sendErrorResponse, ACTIVE } from './shared';
+import { INACTIVE, sendErrorResponse, ACTIVE, ResponseData } from './shared';
 
 class Controller {
 
@@ -31,11 +31,7 @@ class Controller {
         })
         MarcaModel.updateOne({ _id: id }, brand)
             .then((response) => {
-                res.json({
-                    code: 1,
-                    object: response,
-                    message: "Marca activada"
-                });
+                res.send(new ResponseData(response, "Marca activada"));
             }).catch((error) => {
                 sendErrorResponse(error, res);
             });
@@ -46,7 +42,7 @@ class Controller {
         const id  = req.params.id;
         MarcaModel.findByIdAndDelete(id)
         .then((response) => {
-            res.json({ code: 1, object: response, message: "Marca removida" });
+            res.send( new ResponseData(Object(response), "Marca removida"));
         }).catch((error) => {
                 sendErrorResponse(error, res);
         });
@@ -60,7 +56,7 @@ class Controller {
         })
         MarcaModel.updateOne({ _id: id }, brand)
         .then((response) => {
-            res.json({ code: 1, object: response, message: "Marca desactivada" });
+            res.send( new ResponseData(response, "Marca desactivada"));
         }).catch((error) => {
             sendErrorResponse(error, res);
         });
@@ -72,11 +68,7 @@ class Controller {
         const brand: Marca = new MarcaModel({ nombre: nombre, _id: id });
         MarcaModel.updateOne({ _id: id }, brand)
         .then((response) => {
-            res.json({
-                code: 1,
-                object: response,
-                message: "Unidad modificada"
-            });    
+            res.send(new ResponseData(response, "Marca modificada"));    
         }).catch((error) => {
             sendErrorResponse(error, res);
         });
