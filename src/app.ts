@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import routes from "./routes";
+import moment from "moment-timezone";
 
 class Application {
   app: express.Application;
@@ -20,6 +21,7 @@ class Application {
 
   settings() {
     this.app.set("port", 3000);
+    moment.tz.setDefault("America/Buenos_Aires");
   }
 
   middlewares() {

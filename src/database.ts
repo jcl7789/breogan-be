@@ -5,7 +5,8 @@ import { mongodb } from './keys';
 export function connect() {
     mongoose.connect(mongodb.URI, {
         useCreateIndex: true,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     }).then((object) => {
         autoIncrement.initialize(object.connection);
         console.log('Conectado a la base de datos -> ', object.connection.db.databaseName);
