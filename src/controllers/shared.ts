@@ -8,8 +8,7 @@ export const sendErrorResponse = (error: any, res: Response, msg?: string) => {
         msg = 'Hubo un error en la consulta';
     }
     try {
-        const errors = error.errors;
-        const values = Object.values<any>(errors);
+        const values = error.errors ? Object.values<any>(error.errors) : [{ 'kind': 'null', 'path': 'Object' }];
         res.json({
             'code': -1,
             'message': msg,
@@ -20,6 +19,7 @@ export const sendErrorResponse = (error: any, res: Response, msg?: string) => {
             }
         });
     } catch (error) {
+        console.log(error);
         res.status(500).send();
     }
 }
