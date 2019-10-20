@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-import { sendErrorResponse, sendErrorMessageResponse } from './shared';
+import { sendErrorResponse } from './shared';
 import ClienteModel, { Cliente } from '../models/Cliente';
 
 
@@ -16,7 +16,7 @@ class Controller {
         }).catch((error) => {
             if (error.errors) {
                 if (error.errors.numeroDni) {
-                    return sendErrorMessageResponse(error, res, 'Ya existe ese cliente');
+                    return sendErrorResponse(error, res, 'Ya existe ese cliente');
                 }
             } else {
                 sendErrorResponse(error, res);
