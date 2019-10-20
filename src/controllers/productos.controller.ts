@@ -1,6 +1,10 @@
-import ProductoModel, { Producto } from '../models/Producto';
 import { Response, Request } from 'express';
+import moment = require('moment-timezone');
+
 import { sendErrorResponse, INACTIVE, ACTIVE } from './shared'
+import ProductoModel, { Producto } from '../models/Producto';
+import { ObjectID } from 'bson';
+
 
 class Controller {
     
@@ -9,6 +13,7 @@ class Controller {
     // Create
     public agregarProducto(req: Request, res: Response) { 
         const data: Producto = req.body;
+        Object.assign(data, { 'fechaUltimoMovimiento': moment().format()});
         new ProductoModel(data).save().then((response) => {
             res.status(200).json({code: 1, message: "Agregado"});
         }).catch((error) => {
@@ -51,7 +56,10 @@ class Controller {
     public modificarProducto(req: Request, res: Response) {
         const id = req.params.id;
         const modifiedData: Producto = req.body;
-        modifiedData._id = id;
+        Object.assign(modifiedData, {
+            'fechaUltimoMovimiento': moment().format(),
+            '_id': id
+        });
         ProductoModel.updateOne({ _id: id }, modifiedData)
         .then((response) => {
             res.json({
@@ -68,7 +76,11 @@ class Controller {
     // No se borra el producto, se lo desactiva
     public borrarProducto(req: Request, res: Response) {
         const id = req.params.id;
-        ProductoModel.updateOne({ _id: id }, {activo: INACTIVE})
+        const data = Object.assign({}, {
+            'activo': INACTIVE,
+            'fechaUltimoMovimiento': moment().format()
+        })
+        ProductoModel.updateOne({ _id: id }, data)
         .then((response) => {
             res.json({
                 code: 1,
@@ -83,7 +95,11 @@ class Controller {
     // Reagregar (Reactivate)
     public activarProducto(req: Request, res: Response) {
         const id = req.params.id;
-        ProductoModel.updateOne({ _id: id }, {activo: ACTIVE})
+        const data = Object.assign({}, {
+            'activo': ACTIVE,
+            'fechaUltimoMovimiento': moment().format()
+        })
+        ProductoModel.updateOne({ _id: id }, data)
         .then((response) => {
             res.json({
                 code: 1,
@@ -94,7 +110,6 @@ class Controller {
             sendErrorResponse(error, res);
         });
     }
-
 }
 
 export const productsController = new Controller();

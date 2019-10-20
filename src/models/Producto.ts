@@ -13,7 +13,7 @@ export interface Producto extends mongoose.Document {
     stock: number,
     precio: number,
     fechaUltimoMovimiento: Date,
-    vigente: boolean
+    activo: boolean
 }
 
 const ProductoSchema = new Schema({
@@ -26,7 +26,7 @@ const ProductoSchema = new Schema({
     stock: Number,
     precio: Number,
     fechaUltimoMovimiento: Date,
-    vigente: Boolean
+    activo: Boolean
 });
 
 ProductoSchema.plugin(uniqueValidator);

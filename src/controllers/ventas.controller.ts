@@ -2,6 +2,7 @@ import { Response, Request } from 'express';
 
 import VentaModel, { Venta } from '../models/Venta';
 import { sendErrorResponse } from './shared';
+import { ObjectID } from 'bson';
 
 class Controller {
 
@@ -50,8 +51,7 @@ class Controller {
     public modificarVenta(req: Request, res: Response) {
         const id = req.params.id;
         const modifiedData: Venta = req.body;
-        modifiedData._id = id;
-        VentaModel.updateOne(id, modifiedData)
+        VentaModel.updateOne({_id: id}, modifiedData)
         .then((result) => {
             res.json({
                 code: 1,
@@ -66,7 +66,7 @@ class Controller {
     // Delete
     public cancelarVenta(req: Request, res: Response) {
         const id = req.params.id;
-        VentaModel.findByIdAndDelete(id)
+        VentaModel.findByIdAndDelete({_id: id})
             .then((result) => {
                 res.json({
                     code: 1,
