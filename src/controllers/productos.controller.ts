@@ -15,7 +15,7 @@ class Controller {
         const data: Producto = req.body;
         Object.assign(data, { 'fechaUltimoMovimiento': moment().format() });
         new ProductoModel(data).save().then((response) => {
-            res.status(200).json({ code: 1, message: "Agregado" });
+            res.status(200).json({ code: 1, message: "Agregado", object: response });
         }).catch((error) => {
             sendErrorResponse(error, res);
         });
