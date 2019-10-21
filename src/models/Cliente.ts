@@ -1,6 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
-import { ObjectID } from "bson";
 
 import { Direccion } from "./Direccion";
 import { Telefono } from "./Telefono";
@@ -17,7 +16,7 @@ export interface Cliente extends mongoose.Document {
   telefonos: Telefono[];
   mascotas: Mascota[];
   fecNac: string;
-  user_id: String
+  user_id: string;
 }
 
 const ClienteSchema = new Schema({

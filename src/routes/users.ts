@@ -6,7 +6,7 @@ const router: Router = Router();
 // Create
 router.post('/signup', userController.registrarUsuario);
 // Read
-router.get('/login', userController.loginUsuario);
+router.post('/login', userController.loginUsuario);
 router.get('/dev', userController.obtenerTodosUsers);
 
 // Update (ChangePassword)
