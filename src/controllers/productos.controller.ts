@@ -131,6 +131,9 @@ class Controller {
         const { unidades } = req.body;
         ProductoModel.findOne({ _id: id }).then((producto) => {
             if (producto) {
+                if (producto.stock - unidades < 1) {
+                    throw [{ 'kind': 'StockBelow0', 'path': 'stock' }];
+                }
                 const data = Object.assign({}, {
                     stock: producto.stock - unidades
                 });
