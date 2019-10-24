@@ -125,6 +125,35 @@ class Controller {
                 sendErrorResponse(error, res);
             });
     }
+
+    public actualizarStock(req: Request, res: Response) {
+        const id = req.params.id;
+        const { unidades } = req.body;
+        ProductoModel.findOne({ _id: id }).then((producto) => {
+            if (producto) {
+                const data = Object.assign({}, {
+                    stock: producto.stock - unidades
+                });
+                ProductoModel.updateOne({ _id: id }, data)
+                    .then((response) => {
+                        if (response.n && response.n !== 0) {
+                            const message = response.nModified && response.nModified !== 0 ? 'Stock actualizado' : 'Sin cambios';
+                            res.status(200).json({
+                                code: response.ok,
+                                object: response,
+                                message: message
+                            });
+                        } else {
+                            res.status(204).send();
+                        }
+                    }).catch((error) => {
+                        sendErrorResponse(error, res);
+                    });
+            }
+        }).catch((error) => {
+            sendErrorResponse(error, res);
+        });
+    }
 }
 
 export const productsController = new Controller();

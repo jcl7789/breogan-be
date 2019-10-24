@@ -14,7 +14,10 @@ export interface Producto extends mongoose.Document {
     stock: number,
     precio: number,
     fechaUltimoMovimiento: Date,
-    activo: boolean
+    activo: boolean,
+    imgUrl: string;
+    minStock: number;
+    maxStock: number;
 }
 
 const ProductoSchema = new Schema({
@@ -28,7 +31,10 @@ const ProductoSchema = new Schema({
     stock: Number,
     precio: Number,
     fechaUltimoMovimiento: Date,
-    activo: Boolean
+    activo: Boolean,
+    imgUrl: String,
+    minStock: Number,
+    maxStock: Number
 });
 
 ProductoSchema.plugin(uniqueValidator);

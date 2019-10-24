@@ -21,4 +21,7 @@ router.put('/:id', productsController.modificarProducto);
 // Delete (Deactivate)
 router.delete('/:id', productsController.borrarProducto);
 
+// actualizar stock
+router.post('/refresh/:id', productsController.actualizarStock);
+
 export default router;
